@@ -1,4 +1,4 @@
-package br.ufms.progmobile.caliopelib;
+package br.ufms.progmobile.caliopelib.activities;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {

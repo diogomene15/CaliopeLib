@@ -1,4 +1,4 @@
-package br.ufms.progmobile.caliopelib;
+package br.ufms.progmobile.caliopelib.activities;
 
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.databinding.ActivityMainBinding;
 
 import android.view.Menu;

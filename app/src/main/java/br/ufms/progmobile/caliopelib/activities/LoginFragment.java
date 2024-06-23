@@ -14,9 +14,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.dao.UsuarioDAO;
 import br.ufms.progmobile.caliopelib.database.AppDatabase;
-import br.ufms.progmobile.caliopelib.databinding.LoginFragmentBinding;
 import br.ufms.progmobile.caliopelib.entities.Usuario;
 import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
+import br.ufms.progmobile.caliopelib.databinding.LoginFragmentBinding;
 
 public class LoginFragment extends Fragment {
 
