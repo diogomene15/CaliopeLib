@@ -6,24 +6,25 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufms.progmobile.caliopelib.entities.Alarme;
 
 @Dao
-public interface LivroDAO {
-    @Query("SELECT * FROM Alarme WHERE livroId = :idLivro")
-    public Alarme getLivro(long idLivro);
+public interface AlarmeDAO {
+    @Query("SELECT * FROM Alarme WHERE livroId = :idAlarme")
+    public Alarme getAlarme(long idAlarme);
 
     @Query("SELECT * FROM Alarme")
     public List<Alarme> getAll();
 
     @Insert
-    long insert(Alarme livro);
+    long insert(Alarme alarm);
 
     @Update
-    void update(Alarme livro);
+    void update(Alarme alarm);
 
     @Delete
-    void delete(Alarme livro);
+    void delete(Alarme alarm);
 }

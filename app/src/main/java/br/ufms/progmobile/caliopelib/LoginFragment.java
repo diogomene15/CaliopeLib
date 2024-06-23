@@ -1,27 +1,31 @@
-package br.ufms.progmobile.caliopelib;
+package br.ufms.progmobile.caliopelib.activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import br.ufms.progmobile.caliopelib.databinding.FragmentFirstBinding;
+import br.ufms.progmobile.caliopelib.R;
+import br.ufms.progmobile.caliopelib.dao.UsuarioDAO;
+import br.ufms.progmobile.caliopelib.database.AppDatabase;
+import br.ufms.progmobile.caliopelib.databinding.LoginFragmentBinding;
+import br.ufms.progmobile.caliopelib.entities.Usuario;
+import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
 
 public class LoginFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private LoginFragmentBinding binding;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = LoginFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,9 +33,26 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(v ->
+        CurrentUser cu = CurrentUser.getInstance();
+        cu.setUser(null);
+        binding.buttonSubmitLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String emailAd = binding.inputLoginEmailAddress.getText().toString();
+                String pwd = binding.inputLoginPassword.getText().toString();
+
+                if (!emailAd.isEmpty() && !pwd.isEmpty()) {
+                    new GetUserTask().execute(new Usuario(emailAd, pwd));
+                } else {
+                    Toast.makeText(getActivity(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        binding.buttonCadastroFragmentNav.setOnClickListener(v ->
                 NavHostFragment.findNavController(LoginFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        .navigate(R.id.action_LoginFragment_to_CadastroFragment)
         );
     }
 
@@ -39,6 +60,38 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private class GetUserTask extends AsyncTask<Usuario, Void, Usuario> {
+        @Override
+        protected Usuario doInBackground(Usuario... usuarios) {
+            Usuario usuarioInput = usuarios[0];
+            AppDatabase db = AppDatabase.getDatabase(getContext());
+            UsuarioDAO usuarioDAO = db.usuarioDao();
+            Usuario usuarioExistente = usuarioDAO.getUserByEmail(usuarioInput.getEmail());
+            if (usuarioExistente != null){
+                if (usuarioExistente.getSenha().equals(usuarioInput.getSenha())) {
+                    return usuarioExistente;
+                } else if (!usuarioExistente.getSenha().equals(usuarioInput.getSenha())){
+                    return new Usuario();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Usuario usuario) {
+            if (usuario == null) {
+                Toast.makeText(getActivity(), "Email não cadastrado", Toast.LENGTH_SHORT).show();
+            } else if (usuario.getSenha() == null){
+                Toast.makeText(getActivity(), "Senha incorreta", Toast.LENGTH_SHORT).show();
+            } else {
+                CurrentUser cu = CurrentUser.getInstance();
+                cu.setUser(usuario);
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_LoginFragment_to_EnderecosFragment);
+            }
+        }
     }
 
 }
