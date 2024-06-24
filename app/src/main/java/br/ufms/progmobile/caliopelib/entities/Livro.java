@@ -4,11 +4,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Livro implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long livroId;
+    private long usuarioId;
     private String titulo;
     private String descricao;
     private String fotoPath;
@@ -65,5 +67,18 @@ public class Livro implements Serializable {
 
     public void setAvaliacao(int avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(titulo, livro.titulo) && Objects.equals(descricao, livro.descricao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, descricao);
     }
 }

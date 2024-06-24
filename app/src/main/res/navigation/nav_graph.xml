@@ -3,26 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/AlarmeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="br.ufms.progmobile.caliopelib.LoginFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_login">
+        android:id="@+id/AlarmeFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.AlarmeFragment"
+        android:label="@string/alarme_fragment_label"
+        tools:layout="@layout/alarmes_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/CadastroAlarmeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="br.ufms.progmobile.caliopelib.activities.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/CadastroAlarmeFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
+        android:label="@string/cadastro_alarme_fragment_label"
+        tools:layout="@layout/login_fragment">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/AlarmeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CadastroFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
+        android:label="@string/cadastro_alarme_fragment_label"
+        tools:layout="@layout/cadastro_fragment">
+
+        <action
+            android:id="@+id/action_CadastroFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
+        android:label="@string/cadastro_alarme_fragment_label"
+        tools:layout="@layout/login_fragment">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_CadastroFragment"
+            app:destination="@id/CadastroFragment" />
     </fragment>
 </navigation>

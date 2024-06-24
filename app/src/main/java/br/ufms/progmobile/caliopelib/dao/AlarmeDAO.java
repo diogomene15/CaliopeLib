@@ -13,8 +13,11 @@ import br.ufms.progmobile.caliopelib.entities.Alarme;
 
 @Dao
 public interface AlarmeDAO {
-    @Query("SELECT * FROM Alarme WHERE livroId = :idAlarme")
+    @Query("SELECT * FROM Alarme WHERE alarmeId = :idAlarme")
     public Alarme getAlarme(long idAlarme);
+
+    @Query("SELECT * FROM Alarme WHERE usuarioId = :idUsuario")
+    public List<Alarme> getAlarmesByUsuario(long idUsuario);
 
     @Query("SELECT * FROM Alarme")
     public List<Alarme> getAll();

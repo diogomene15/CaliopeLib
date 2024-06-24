@@ -92,7 +92,7 @@ public class CadastroFragment extends Fragment {
                 cu.setUser(currentUser);
 
                 NavHostFragment.findNavController(CadastroFragment.this)
-                        .navigate(R.id.action_CadastroFragment_to_EnderecosFragment);
+                        .navigate(R.id.action_CadastroFragment_to_MenuFragment);
             } else {
                 Toast.makeText(getActivity(), "Email já cadastrado", Toast.LENGTH_SHORT).show();
             }
@@ -100,3 +100,6 @@ public class CadastroFragment extends Fragment {
     }
 
 }
+
+// GW3~]P;R&8D:xmEb*e`phk_j/+f#cQU)y$%u=!N?,-v@w2ztVScg(nmS_v7U#PG$){Wu+?!s&*Hq]RyQANY;j9fKZ^':=zV/dD@b
+// Objects.hash

@@ -1,0 +1,66 @@
+package br.ufms.progmobile.caliopelib.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.navigation.fragment.NavHostFragment;
+
+import java.util.List;
+
+import br.ufms.progmobile.caliopelib.R;
+import br.ufms.progmobile.caliopelib.activities.AlarmeFragment;
+import br.ufms.progmobile.caliopelib.database.AppDatabase;
+import br.ufms.progmobile.caliopelib.entities.Alarme;
+import br.ufms.progmobile.caliopelib.useCases.CurrentAlarme;
+
+public class AlarmeAdapter extends ArrayAdapter<Alarme> {
+    private Context context;
+    private List<Alarme> items;
+
+    public AlarmeAdapter(Context context, List<Alarme> items) {
+        super(context, R.layout.item_alarme_list, items);
+        this.context = context;
+        this.items = items;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_alarme_list, parent, false);
+        }
+
+        TextView textView = convertView.findViewById(R.id.item_text);
+        Button buttonExcluir = convertView.findViewById(R.id.buttonExcluirAlarme);
+        Button buttonEditar = convertView.findViewById(R.id.buttonEditarAlarme);
+
+        textView.setText(items.get(position).toString());
+
+        CurrentAlarme.getInstance().setAlarme(items.get(position));
+        buttonExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAlarme(items.get(position));
+                items.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+
+        buttonEditar.setOnClickListener(v ->
+                NavHostFragment.findNavController(AlarmeFragment.class)
+                        .navigate(R.id.action_AlarmesFragment_to_CadastroAlarme)
+        );
+
+        return convertView;
+    }
+
+    public void deleteAlarme(Alarme alarme){
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        db.alarmeDao().delete(alarme);
+    }
+
+}
