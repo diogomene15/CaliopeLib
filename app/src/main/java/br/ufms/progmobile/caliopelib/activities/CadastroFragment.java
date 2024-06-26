@@ -92,7 +92,7 @@ public class CadastroFragment extends Fragment {
                 cu.setUser(currentUser);
 
                 NavHostFragment.findNavController(CadastroFragment.this)
-                        .navigate(R.id.action_CadastroFragment_to_MenuFragment);
+                        .navigate(R.id.action_CadastroAlarmeFragment_to_livrosFragment);
             } else {
                 Toast.makeText(getActivity(), "Email já cadastrado", Toast.LENGTH_SHORT).show();
             }

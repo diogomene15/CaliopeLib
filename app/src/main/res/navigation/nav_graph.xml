@@ -12,7 +12,7 @@
         tools:layout="@layout/alarmes_fragment">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_AlarmesFragment_to_CadastroAlarme"
             app:destination="@id/CadastroAlarmeFragment" />
     </fragment>
     <fragment
@@ -22,8 +22,11 @@
         tools:layout="@layout/login_fragment">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_AlarmesFragment_to_CadastroAlarme"
             app:destination="@id/AlarmeFragment" />
+        <action
+            android:id="@+id/action_CadastroAlarmeFragment_to_livrosFragment"
+            app:destination="@id/livrosFragment" />
     </fragment>
 
     <fragment
@@ -45,5 +48,13 @@
         <action
             android:id="@+id/action_LoginFragment_to_CadastroFragment"
             app:destination="@id/CadastroFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_livrosFragment"
+            app:destination="@id/livrosFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/livrosFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.LivrosFragment"
+        android:label="fragment_livros"
+        tools:layout="@layout/fragment_livros" />
 </navigation>
