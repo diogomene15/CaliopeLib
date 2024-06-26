@@ -14,7 +14,7 @@ import br.ufms.progmobile.caliopelib.entities.Livro;
 @Dao
 public interface LivroDAO {
     @Query("SELECT * FROM Livro WHERE livroId = :idLivro")
-    public Alarme getLivro(long idLivro);
+    public Livro getLivro(long idLivro);
 
     @Query("SELECT * FROM Livro WHERE usuarioId = :idUsuario")
     public List<Livro> getLivrosByUsuario(long idUsuario);
@@ -24,7 +24,7 @@ public interface LivroDAO {
 
 
     @Query("SELECT * FROM Livro")
-    public List<Alarme> getAll();
+    public List<Livro> getAll();
 
     @Insert
     long insert(Livro livro);

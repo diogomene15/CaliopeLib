@@ -16,6 +16,7 @@ public class Livro implements Serializable {
     private String fotoPath;
     private int avaliacao;
 
+    public Livro(){}
 
     public Livro(String titulo, String descricao, String fotoPath, int avaliacao) {
         this.titulo = titulo;
@@ -69,6 +70,14 @@ public class Livro implements Serializable {
         this.avaliacao = avaliacao;
     }
 
+    public long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,4 +90,5 @@ public class Livro implements Serializable {
     public int hashCode() {
         return Objects.hash(titulo, descricao);
     }
+
 }
