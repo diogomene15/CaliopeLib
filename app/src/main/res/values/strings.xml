@@ -55,5 +55,10 @@
 
     <string name="avaliacaoTextView_label">Avaliação</string>
     <string name="addFotoButton_text">Adicionar foto</string>
+
     <string name="cadastrarLivroButton_text">Cadastrar livro</string>
+
+    <string name="atualizarLivroButton_text">Atualizar livro</string>
+    <string name="excluirLivroButton_text">Excluir livro</string>
+
 </resources>
