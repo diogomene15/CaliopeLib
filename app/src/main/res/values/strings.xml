@@ -46,4 +46,14 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tituloTextView_label">Título</string>
+    <string name="tituloEditText_placeholder">Título</string>
+
+    <string name="descricaoTextView_label">Descrição</string>
+    <string name="descricaoEditText_placeholder">Descrição</string>
+
+    <string name="avaliacaoTextView_label">Avaliação</string>
+    <string name="addFotoButton_text">Adicionar foto</string>
+    <string name="cadastrarLivroButton_text">Cadastrar livro</string>
 </resources>
