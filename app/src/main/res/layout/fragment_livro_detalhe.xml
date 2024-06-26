@@ -58,6 +58,7 @@ tools:context=".activities.LivroDetalheFragment">
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
     android:layout_marginTop="12dp"
+    android:progressBackgroundTint="@color/orange"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/newAvaliacaoTextView" />
 
@@ -97,6 +98,7 @@ tools:context=".activities.LivroDetalheFragment">
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/excluirLivroButton_text"
+        android:backgroundTint="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/atualizarLivroButton" />
