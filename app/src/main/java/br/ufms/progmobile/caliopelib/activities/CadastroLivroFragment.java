@@ -27,6 +27,7 @@ import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.database.AppDatabase;
 import br.ufms.progmobile.caliopelib.databinding.FragmentCadastroLivroBinding;
 import br.ufms.progmobile.caliopelib.entities.Livro;
+import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +39,8 @@ public class CadastroLivroFragment extends Fragment {
 
     private FragmentCadastroLivroBinding binding;
     private ActivityResultLauncher<Uri> tirarFotoLaunchner;
+
+    CurrentUser cu;
 
     Uri imageUri;
     public CadastroLivroFragment() {
@@ -105,7 +108,11 @@ public class CadastroLivroFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        cu = CurrentUser.getInstance();
+        if(cu.getUser() == null){
+            Toast.makeText(getActivity(), "Erro ao identificar usuário", Toast.LENGTH_SHORT).show();
+            closeFragment();
+        }
         binding = FragmentCadastroLivroBinding.inflate(inflater, container, false);
 
         imageUri = createUri();
@@ -122,9 +129,18 @@ public class CadastroLivroFragment extends Fragment {
             String descricaoLivro = binding.descricaoEditText.getText().toString();
             float avaliacaoLivro = binding.ratingBar.getRating();
 
+            if(tituloLivro.isEmpty()){
+                Toast.makeText(getActivity(), "Insira um título válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(avaliacaoLivro == 0){
+                Toast.makeText(getActivity(), "Insira uma avaliação válida", Toast.LENGTH_SHORT).show();
+                return;
+            }
             novoLivro.setTitulo(tituloLivro);
             novoLivro.setDescricao(descricaoLivro);
             novoLivro.setAvaliacao(avaliacaoLivro);
+            novoLivro.setUsuarioId(cu.getUser().getUsuarioId());
             novoLivro.setFotoPath(imageUri.toString());
             try {
                 AppDatabase db = AppDatabase.getDatabase(getActivity().getApplicationContext());

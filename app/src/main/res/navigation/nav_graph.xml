@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/AlarmeFragment">
+    app:startDestination="@id/livrosFragment">
 
     <fragment
         android:id="@+id/AlarmeFragment"
@@ -24,9 +24,6 @@
         <action
             android:id="@+id/action_AlarmesFragment_to_CadastroAlarme"
             app:destination="@id/AlarmeFragment" />
-        <action
-            android:id="@+id/action_CadastroAlarmeFragment_to_livrosFragment"
-            app:destination="@id/livrosFragment" />
     </fragment>
 
     <fragment
@@ -55,6 +52,23 @@
     <fragment
         android:id="@+id/livrosFragment"
         android:name="br.ufms.progmobile.caliopelib.activities.LivrosFragment"
-        android:label="fragment_livros"
-        tools:layout="@layout/fragment_livros" />
+        android:label="@string/fragment_livros_label"
+        tools:layout="@layout/fragment_livros" >
+        <action
+            android:id="@+id/action_livrosFragment_to_cadastroLivroFragment"
+            app:destination="@id/cadastroLivroFragment" />
+        <action
+            android:id="@+id/action_livrosFragment_to_livroDetalheFragment"
+            app:destination="@id/livroDetalheFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/livroDetalheFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.LivroDetalheFragment"
+        android:label="@string/fragment_livro_detalhe_label"
+        tools:layout="@layout/fragment_livro_detalhe" />
+    <fragment
+        android:id="@+id/cadastroLivroFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.CadastroLivroFragment"
+        android:label="@string/fragment_cadastro_livro_label"
+        tools:layout="@layout/fragment_cadastro_livro" />
 </navigation>

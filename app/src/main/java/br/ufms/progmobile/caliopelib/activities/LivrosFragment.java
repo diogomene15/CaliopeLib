@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,8 +65,15 @@ public class LivrosFragment extends Fragment {
         binding.livrosListView.setAdapter(livrosAdapter);
         binding.livrosListView.setOnItemClickListener((parent, view1, position, id) -> {
             Livro livroClicado = livrosAdapter.getItem(position);
-
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("livro", livroClicado);
+            NavHostFragment.findNavController(LivrosFragment.this)
+                    .navigate(R.id.action_livrosFragment_to_livroDetalheFragment, bundle);
         });
 
+        binding.novoLivroButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(LivrosFragment.this)
+                    .navigate(R.id.action_livrosFragment_to_cadastroLivroFragment);
+        });
     }
 }

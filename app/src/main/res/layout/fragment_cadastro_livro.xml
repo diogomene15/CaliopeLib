@@ -24,7 +24,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="text"
-        android:text="@string/tituloEditText_placeholder"
+        android:hint="@string/tituloEditText_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloTextView" />
 
@@ -48,7 +48,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:maxLength="100"
-        android:text="@string/descricaoEditText_placeholder"
+        android:hint="@string/descricaoEditText_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaoTextView" />
 
