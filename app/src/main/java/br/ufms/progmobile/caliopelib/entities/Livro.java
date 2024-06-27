@@ -14,7 +14,7 @@ public class Livro implements Serializable {
     private String titulo;
     private String descricao;
     private String fotoPath;
-    private int avaliacao;
+    private float avaliacao;
 
     public Livro(){}
 
@@ -62,7 +62,7 @@ public class Livro implements Serializable {
         this.fotoPath = fotoPath;
     }
 
-    public int getAvaliacao() {
+    public float getAvaliacao() {
         return avaliacao;
     }
 
