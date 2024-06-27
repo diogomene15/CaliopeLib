@@ -12,15 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.File;
 
 import br.ufms.progmobile.caliopelib.R;
+import br.ufms.progmobile.caliopelib.database.AppDatabase;
 import br.ufms.progmobile.caliopelib.databinding.FragmentCadastroLivroBinding;
+import br.ufms.progmobile.caliopelib.entities.Livro;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +82,10 @@ public class CadastroLivroFragment extends Fragment {
             tirarFotoLaunchner.launch(imageUri);
         }
     }
+    private void closeFragment() {
+        NavController navController = NavHostFragment.findNavController(CadastroLivroFragment.this);
+        navController.popBackStack();
+    }
 
 
 
@@ -103,6 +113,27 @@ public class CadastroLivroFragment extends Fragment {
 
         binding.addFotoButton.setOnClickListener(v -> {
             checkAndOpenCamera();
+        });
+
+        binding.cadastrarLivroButton.setOnClickListener(v -> {
+            Livro novoLivro = new Livro();
+
+            String tituloLivro = binding.tituloEditText.getText().toString();
+            String descricaoLivro = binding.descricaoEditText.getText().toString();
+            float avaliacaoLivro = binding.ratingBar.getRating();
+
+            novoLivro.setTitulo(tituloLivro);
+            novoLivro.setDescricao(descricaoLivro);
+            novoLivro.setAvaliacao(avaliacaoLivro);
+            novoLivro.setFotoPath(imageUri.toString());
+            try {
+                AppDatabase db = AppDatabase.getDatabase(getActivity().getApplicationContext());
+                db.livroDao().insert(novoLivro);
+                Toast.makeText(getActivity(), "Livro cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                closeFragment();
+            }catch (Exception e){
+                Toast.makeText(getActivity(), "Erro ao cadastrar livro", Toast.LENGTH_SHORT).show();
+            }
         });
         return binding.getRoot();
     }
