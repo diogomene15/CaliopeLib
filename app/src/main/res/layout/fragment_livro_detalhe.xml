@@ -72,15 +72,15 @@ tools:context=".activities.LivroDetalheFragment">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/newDescricaoEditText" />
 
-<Button
-    android:id="@+id/newAddFotoButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="40dp"
-    android:text="@string/addFotoButton_text"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/newRatingBar" />
+    <Button
+        android:id="@+id/newAddFotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/addFotoButton_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newLivroImageView" />
 
     <Button
         android:id="@+id/atualizarLivroButton"
@@ -102,5 +102,13 @@ tools:context=".activities.LivroDetalheFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/atualizarLivroButton" />
-
+    <ImageView
+        android:id="@+id/newLivroImageView"
+        android:layout_width="89dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="40dp"
+        android:src="@android:drawable/ic_input_get"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newRatingBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
