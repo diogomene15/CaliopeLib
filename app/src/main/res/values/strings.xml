@@ -62,4 +62,7 @@
     <string name="atualizarLivroButton_text">Atualizar livro</string>
     <string name="excluirLivroButton_text">Excluir livro</string>
 
+    <string name="novoLivroButton_text">Adicionar livro</string>
+
+
 </resources>

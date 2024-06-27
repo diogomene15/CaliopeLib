@@ -10,7 +10,6 @@
         android:layout_width="98dp"
         android:layout_height="99dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:src="@android:drawable/ic_input_get"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +31,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/livroListImageView"
         app:layout_constraintTop_toTopOf="@+id/livroListImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

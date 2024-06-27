@@ -1,14 +1,22 @@
 package br.ufms.progmobile.caliopelib.activities;
-
+import br.ufms.progmobile.caliopelib.adapters.LivroListAdapter;
+import br.ufms.progmobile.caliopelib.database.AppDatabase;
+import br.ufms.progmobile.caliopelib.databinding.FragmentLivrosBinding;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import java.util.List;
+
 import br.ufms.progmobile.caliopelib.R;
+import br.ufms.progmobile.caliopelib.entities.Livro;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,33 +25,20 @@ import br.ufms.progmobile.caliopelib.R;
  */
 public class LivrosFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private FragmentLivrosBinding binding;
     public LivrosFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LivrosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
+    private List<Livro> getAllLivros(){
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        List<Livro> livros = db.livroDao().getAll();
+        return livros;
+    }
     public static LivrosFragment newInstance(String param1, String param2) {
         LivrosFragment fragment = new LivrosFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,16 +46,26 @@ public class LivrosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_livros, container, false);
+        binding = FragmentLivrosBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        LivroListAdapter livrosAdapter = new LivroListAdapter(view.getContext(), this.getAllLivros());
+
+        binding.livrosListView.setAdapter(livrosAdapter);
+        binding.livrosListView.setOnItemClickListener((parent, view1, position, id) -> {
+            Livro livroClicado = livrosAdapter.getItem(position);
+
+        });
+
     }
 }
