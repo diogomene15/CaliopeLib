@@ -25,8 +25,11 @@ public interface AlarmeDAO {
     @Insert
     long insert(Alarme alarm);
 
+    @Query("UPDATE Alarme SET hora = :hora AND minuto = :minuto AND livro = :livro WHERE alarmeId = :id")
+    void updateById(int hora, int minuto, String livro, long id);
+
     @Update
-    void update(Alarme alarm);
+    void update(Alarme alarme);
 
     @Delete
     void delete(Alarme alarm);

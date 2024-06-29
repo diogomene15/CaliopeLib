@@ -40,8 +40,6 @@ public class AlarmeFragment extends Fragment {
 
         setAdapter(allAlarmes, view);
 
-        binding.listAlarmes.setAdapter(alarmesAdapter);
-
         binding.buttonAddAlarme.setOnClickListener(v -> navToCadastroAlarme());
     }
 
@@ -75,11 +73,11 @@ public class AlarmeFragment extends Fragment {
                 }
 
                 View itemView = super.getView(position, convertView, parent);
-                Button buttonExcluir = convertView.findViewById(R.id.buttonExcluirAlarme);
-                Button buttonEditar = convertView.findViewById(R.id.buttonEditarAlarme);
+                Button buttonExcluir = itemView.findViewById(R.id.buttonExcluirAlarme);
+                Button buttonEditar = itemView.findViewById(R.id.buttonEditarAlarme);
 
-                TextView item_horario = convertView.findViewById(R.id.item_horario);
-                TextView item_livro = convertView.findViewById(R.id.item_livro);
+                TextView item_horario = itemView.findViewById(R.id.item_horario);
+                TextView item_livro = itemView.findViewById(R.id.item_livro);
 
                 item_horario.setText(allAlarmes.get(position).getHorarioString());
                 item_livro.setText(allAlarmes.get(position).getLivro());
@@ -104,6 +102,8 @@ public class AlarmeFragment extends Fragment {
                 return itemView;
             }
         };
+
+        binding.listAlarmes.setAdapter(alarmesAdapter);
     }
 
 

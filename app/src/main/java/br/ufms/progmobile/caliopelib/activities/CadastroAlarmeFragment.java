@@ -67,13 +67,12 @@ public class CadastroAlarmeFragment extends Fragment {
 
                 if (!nomeLivro.isEmpty() & (currentUsuario != null)) {
                     Alarme a = new Alarme(currentUsuario.getUsuarioId(), nomeLivro, hora, minuto);
-                    Toast.makeText(getActivity(), a.toString(), Toast.LENGTH_SHORT).show();
                     insertAlarme(a);
                 } else if (currentUsuario == null) {
                     Alarme a = new Alarme("(sem informação)", hora, minuto);
                     insertAlarme(a);
                 } else {
-                    Toast.makeText(getActivity(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -94,8 +93,8 @@ public class CadastroAlarmeFragment extends Fragment {
         }
         else {
             for (Alarme a : alarmesExistentes) {
-                if (a.equals(alarme) & alarme.equals(CurrentAlarme.getInstance().getAlarme())) {
-                    AlarmeNotificacao.atualizarAlarme(getContext(), alarme);
+                if (CurrentAlarme.getInstance().getAlarme() != null) {
+                    AlarmeNotificacao.atualizarAlarme(getContext(), alarme, CurrentAlarme.getInstance().getAlarme().getAlarmeId());
                     CurrentAlarme.getInstance().setAlarme(null);
 
                     break;

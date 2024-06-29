@@ -5,7 +5,7 @@ import br.ufms.progmobile.caliopelib.entities.Usuario;
 
 public class CurrentAlarme {
     private static CurrentAlarme instance;
-    private Alarme alarme;
+    private Alarme alarme = null;
 
     private CurrentAlarme() {}
 

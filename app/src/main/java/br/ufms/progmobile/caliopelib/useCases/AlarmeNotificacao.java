@@ -32,13 +32,14 @@ public class AlarmeNotificacao {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmeReceiver.class);
         intent.putExtra("livro", alarm.getLivro());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, PendingIntent.FLAG_IMMUTABLE);
 
         alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
+        
     }
 
-    public static void atualizarAlarme(Context context, Alarme alarm) {
+    public static void atualizarAlarme(Context context, Alarme alarm, long alarmeid) {
         AppDatabase db = AppDatabase.getDatabase(context);
 
         int hora = alarm.getHora();
@@ -51,14 +52,16 @@ public class AlarmeNotificacao {
         calendar.set(Calendar.MILLISECOND, 0);
 
         int pendingIntentId = (int) System.currentTimeMillis();
+
         alarm.setPendingIntentId(pendingIntentId);
 
+        alarm.setAlarmeId(alarmeid);
 
         db.alarmeDao().update(alarm);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmeNotificacao.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, PendingIntent.FLAG_IMMUTABLE);
 
         alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -72,7 +75,7 @@ public class AlarmeNotificacao {
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, AlarmeReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, pendingIntentId, intent, PendingIntent.FLAG_IMMUTABLE);
 
             alarmManager.cancel(pendingIntent);
 

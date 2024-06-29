@@ -98,6 +98,13 @@ public class Alarme implements Serializable {
         return usuarioId == alarme.usuarioId && hora == alarme.hora && minuto == alarme.minuto && Objects.equals(livro, alarme.livro);
     }
 
+    public boolean equalsUsuarioLivro(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alarme alarme = (Alarme) o;
+        return usuarioId == alarme.usuarioId && Objects.equals(livro, alarme.livro);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(usuarioId, livro, hora, minuto);
