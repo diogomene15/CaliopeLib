@@ -11,12 +11,11 @@ A aplicação proposta é um aplicativo móvel de gerenciamento de leituras dese
 - RF01: O sistema deve permitir que o usuário cadastre informações de um livro, incluindo título (obrigatório), foto (opcional), avaliação (obrigatória) e descrição (opcional).
 - RF02: O sistema deve permitir que o usuário programe alarmes diários para leitura, com notificações nos horários especificados.
 - RF03: O sistema deve permitir que o usuário crie, edite e exclua alarmes de leitura.
-- RF04: O sistema deve permitir que usuários não cadastrados utilizem a ferramenta de lembretes de leitura, sem possibilidade de cadastrar informações de livros.
-- RF05: O sistema deve permitir que o usuário visualize os livros cadastrados, exibindo títulos, fotos (tiradas ou padrão) e avaliações para cada item listado.
-- RF06: O sistema deve permitir que o usuário edite e exclua as informações dos livros cadastrados.
-- RF07: O sistema deve permitir que o usuário acesse detalhes de uma leitura cadastrada, incluindo título, imagem (tirada ou padrão), avaliação e descrição (se disponível).
-- RF08: O sistema deve permitir a autenticação e registro de novos usuários.
-- RF09: O sistema deve permitir a utilização limitada das funcionalidades para usuários não cadastrados. 
+- RF04: O sistema deve permitir que o usuário visualize os livros cadastrados, exibindo títulos, fotos (tiradas ou padrão) e avaliações para cada item listado.
+- RF05: O sistema deve permitir que o usuário edite e exclua as informações dos livros cadastrados.
+- RF06: O sistema deve permitir que o usuário acesse detalhes de uma leitura cadastrada, incluindo título, imagem (tirada ou padrão), avaliação e descrição (se disponível).
+- RF07: O sistema deve permitir a autenticação e registro de novos usuários.
+- RF08: O sistema deve permitir a utilização limitada das funcionalidades para usuários não cadastrados. 
 
 ## Requisitos Não Funcionais
 - RNF01: O sistema deve garantir a qualidade, confiabilidade e segurança da aplicação.
