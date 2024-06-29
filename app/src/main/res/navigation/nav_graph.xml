@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/livrosFragment">
+    app:startDestination="@id/CadastroFragment">
 
     <fragment
         android:id="@+id/AlarmeFragment"
@@ -15,31 +15,34 @@
             android:id="@+id/action_AlarmesFragment_to_CadastroAlarme"
             app:destination="@id/CadastroAlarmeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/CadastroAlarmeFragment"
-        android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
+        android:name="br.ufms.progmobile.caliopelib.activities.CadastroAlarmeFragment"
         android:label="@string/cadastro_alarme_fragment_label"
-        tools:layout="@layout/login_fragment">
-
+        tools:layout="@layout/cadastro_alarme_fragment">
         <action
-            android:id="@+id/action_AlarmesFragment_to_CadastroAlarme"
+            android:id="@+id/action_CadastroAlarme_to_AlarmesFragment"
             app:destination="@id/AlarmeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/CadastroFragment"
-        android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
-        android:label="@string/cadastro_alarme_fragment_label"
+        android:name="br.ufms.progmobile.caliopelib.activities.CadastroFragment"
+        android:label="@string/cadastro_fragment_label"
         tools:layout="@layout/cadastro_fragment">
 
         <action
             android:id="@+id/action_CadastroFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_CadastroFragment_to_LivrosFragment"
+            app:destination="@id/livrosFragment" />
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
         android:name="br.ufms.progmobile.caliopelib.activities.LoginFragment"
-        android:label="@string/cadastro_alarme_fragment_label"
+        android:label="@string/login_fragment_label"
         tools:layout="@layout/login_fragment">
 
         <action
@@ -60,6 +63,9 @@
         <action
             android:id="@+id/action_livrosFragment_to_livroDetalheFragment"
             app:destination="@id/livroDetalheFragment" />
+        <action
+            android:id="@+id/action_LivrosFragment_to_AlarmeFragment"
+            app:destination="@id/AlarmeFragment" />
     </fragment>
     <fragment
         android:id="@+id/livroDetalheFragment"

@@ -11,6 +11,8 @@ public class Alarme implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long alarmeId;
 
+    private long pendingIntentId;
+
     private long usuarioId;
     private String livro;
     private int hora;
@@ -20,6 +22,14 @@ public class Alarme implements Serializable {
 
     public long getUsuarioId() {
         return usuarioId;
+    }
+
+    public long getPendingIntentId() {
+        return pendingIntentId;
+    }
+
+    public void setPendingIntentId(long pendingIntentId) {
+        this.pendingIntentId = pendingIntentId;
     }
 
     public void setUsuarioId(long usuarioId) {
@@ -33,6 +43,15 @@ public class Alarme implements Serializable {
     }
 
     public Alarme(long usuarioId, String livro, int hora, int minuto) {
+        this.usuarioId = usuarioId;
+        this.livro = livro;
+        this.hora = hora;
+        this.minuto = minuto;
+    }
+
+    public Alarme(long alarmeId, long pendingIntentId, long usuarioId, String livro, int hora, int minuto) {
+        this.alarmeId = alarmeId;
+        this.pendingIntentId = pendingIntentId;
         this.usuarioId = usuarioId;
         this.livro = livro;
         this.hora = hora;
@@ -82,5 +101,21 @@ public class Alarme implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(usuarioId, livro, hora, minuto);
+    }
+
+    public String getHorarioString(){
+        return String.format("%d:%d", this.hora, this.minuto);
+    }
+
+    @Override
+    public String toString() {
+        return "Alarme{" +
+                "alarmeId=" + alarmeId +
+                ", pendingIntentId=" + pendingIntentId +
+                ", usuarioId=" + usuarioId +
+                ", livro='" + livro + '\'' +
+                ", hora=" + hora +
+                ", minuto=" + minuto +
+                '}';
     }
 }

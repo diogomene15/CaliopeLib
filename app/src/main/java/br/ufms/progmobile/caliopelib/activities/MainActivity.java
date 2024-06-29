@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.databinding.ActivityMainBinding;
+import br.ufms.progmobile.caliopelib.useCases.AlarmeDisplayer;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+
+        AlarmeDisplayer.createNotificationChannel(this);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();

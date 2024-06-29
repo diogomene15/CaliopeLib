@@ -6,28 +6,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.List;
 
+import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.database.AppDatabase;
 import br.ufms.progmobile.caliopelib.databinding.CadastroAlarmeFragmentBinding;
 import br.ufms.progmobile.caliopelib.entities.Alarme;
 import br.ufms.progmobile.caliopelib.entities.Livro;
 import br.ufms.progmobile.caliopelib.entities.Usuario;
+import br.ufms.progmobile.caliopelib.useCases.AlarmeNotificacao;
 import br.ufms.progmobile.caliopelib.useCases.CurrentAlarme;
 import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
 
-public class CadastroAlarme extends Fragment {
+public class CadastroAlarmeFragment extends Fragment {
 
-
+    private TimePicker timePicker;
     private CadastroAlarmeFragmentBinding binding;
-    Livro livro = new Livro("","", "",0);
+    private Livro livro = new Livro("","", "",0);
+    private int hora = 0;
+    private int minuto = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class CadastroAlarme extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         binding.spinnerLivros.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -62,8 +67,8 @@ public class CadastroAlarme extends Fragment {
 
                 if (!nomeLivro.isEmpty() & (currentUsuario != null)) {
                     Alarme a = new Alarme(currentUsuario.getUsuarioId(), nomeLivro, hora, minuto);
+                    Toast.makeText(getActivity(), a.toString(), Toast.LENGTH_SHORT).show();
                     insertAlarme(a);
-
                 } else if (currentUsuario == null) {
                     Alarme a = new Alarme("(sem informação)", hora, minuto);
                     insertAlarme(a);
@@ -84,20 +89,25 @@ public class CadastroAlarme extends Fragment {
         AppDatabase db = AppDatabase.getDatabase(getContext());
         List<Alarme> alarmesExistentes = db.alarmeDao().getAlarmesByUsuario(alarme.getUsuarioId());
 
-        for (Alarme a : alarmesExistentes){
-            if (a.equals(alarme) & alarme.equals(CurrentAlarme.getInstance().getAlarme())) {
-                db.alarmeDao().update(alarme);
-                CurrentAlarme.getInstance().setAlarme(null);
-                break;
-            }
-            else if (a.equals(alarme)) {
-                Toast.makeText(getActivity(), "Alarme já cadastrado", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            else {
-                db.alarmeDao().insert(alarme);
+        if (alarmesExistentes.isEmpty()){
+            AlarmeNotificacao.agendarAlarme(getContext(), alarme);
+        }
+        else {
+            for (Alarme a : alarmesExistentes) {
+                if (a.equals(alarme) & alarme.equals(CurrentAlarme.getInstance().getAlarme())) {
+                    AlarmeNotificacao.atualizarAlarme(getContext(), alarme);
+                    CurrentAlarme.getInstance().setAlarme(null);
+
+                    break;
+                } else if (a.equals(alarme)) {
+                    Toast.makeText(getActivity(), "Alarme já cadastrado", Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    AlarmeNotificacao.agendarAlarme(getContext(), alarme);
+                }
             }
         }
+        navToAlarmesFragment();
     }
 
     public List<Livro> getLivros(){
@@ -110,4 +120,10 @@ public class CadastroAlarme extends Fragment {
             return db.livroDao().getLivrosSemUsuario();
         }
     }
+
+    public void navToAlarmesFragment(){
+        NavHostFragment.findNavController(CadastroAlarmeFragment.this)
+                .navigate(R.id.action_CadastroAlarme_to_AlarmesFragment);
+    }
+
 }

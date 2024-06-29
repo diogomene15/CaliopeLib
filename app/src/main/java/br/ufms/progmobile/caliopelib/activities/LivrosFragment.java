@@ -75,5 +75,10 @@ public class LivrosFragment extends Fragment {
             NavHostFragment.findNavController(LivrosFragment.this)
                     .navigate(R.id.action_livrosFragment_to_cadastroLivroFragment);
         });
+
+        binding.buttonNavAlarme.setOnClickListener(v ->
+                NavHostFragment.findNavController(LivrosFragment.this)
+                        .navigate(R.id.action_LivrosFragment_to_AlarmeFragment)
+        );
     }
 }

@@ -91,4 +91,8 @@ public class Livro implements Serializable {
         return Objects.hash(titulo, descricao);
     }
 
+    public String toString(){
+        return this.titulo;
+    }
+
 }
