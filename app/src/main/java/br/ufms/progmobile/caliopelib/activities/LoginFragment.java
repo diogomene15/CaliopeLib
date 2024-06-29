@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.Objects;
+
 import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.dao.UsuarioDAO;
 import br.ufms.progmobile.caliopelib.database.AppDatabase;
@@ -70,9 +72,10 @@ public class LoginFragment extends Fragment {
             UsuarioDAO usuarioDAO = db.usuarioDao();
             Usuario usuarioExistente = usuarioDAO.getUserByEmail(usuarioInput.getEmail());
             if (usuarioExistente != null){
-                if (usuarioExistente.getSenha().equals(usuarioInput.getSenha())) {
+                String senhaCriptografada = String.valueOf(Objects.hash(usuarioInput.getSenha(), "GW3~]P;R&8D:xmEb*e`phk_j/+f#cQU)y$%u=!N?,-v@w2ztVScg(nmS_v7U#PG$){Wu+?!s&*Hq]RyQANY;j9fKZ^':=zV/dD@b"));
+                if (usuarioExistente.getSenha().equals(senhaCriptografada)) {
                     return usuarioExistente;
-                } else if (!usuarioExistente.getSenha().equals(usuarioInput.getSenha())){
+                } else if (!usuarioExistente.getSenha().equals(senhaCriptografada)){
                     return new Usuario();
                 }
             }

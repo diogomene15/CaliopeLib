@@ -36,7 +36,7 @@ public class AlarmeNotificacao {
 
         alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
-        
+
     }
 
     public static void atualizarAlarme(Context context, Alarme alarm, long alarmeid) {

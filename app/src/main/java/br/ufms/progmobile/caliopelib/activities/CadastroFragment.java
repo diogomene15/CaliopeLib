@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.util.Objects;
+
 import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.dao.UsuarioDAO;
 import br.ufms.progmobile.caliopelib.database.AppDatabase;
@@ -75,6 +77,10 @@ public class CadastroFragment extends Fragment {
             if (usuarioExistente != null){
                 return usuarioExistente;
             }
+            int senha = Objects.hash(usuarios[0].getSenha(), "GW3~]P;R&8D:xmEb*e`phk_j/+f#cQU)y$%u=!N?,-v@w2ztVScg(nmS_v7U#PG$){Wu+?!s&*Hq]RyQANY;j9fKZ^':=zV/dD@b");
+
+            usuarios[0].setSenha(String.valueOf(senha));
+
             long userId = usuarioDAO.insert(usuarios[0]);
             currentUser.setUsuarioId(userId);
 
@@ -100,6 +106,3 @@ public class CadastroFragment extends Fragment {
     }
 
 }
-
-// GW3~]P;R&8D:xmEb*e`phk_j/+f#cQU)y$%u=!N?,-v@w2ztVScg(nmS_v7U#PG$){Wu+?!s&*Hq]RyQANY;j9fKZ^':=zV/dD@b
-// Objects.hash
