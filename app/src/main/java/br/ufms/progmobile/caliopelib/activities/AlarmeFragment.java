@@ -21,6 +21,7 @@ import br.ufms.progmobile.caliopelib.entities.Alarme;
 import br.ufms.progmobile.caliopelib.entities.Livro;
 import br.ufms.progmobile.caliopelib.useCases.AlarmeNotificacao;
 import br.ufms.progmobile.caliopelib.useCases.CurrentAlarme;
+import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
 
 public class AlarmeFragment extends Fragment {
     private AlarmesFragmentBinding binding;
@@ -51,7 +52,7 @@ public class AlarmeFragment extends Fragment {
 
     private List<Alarme> getAllAlarmes(){
         AppDatabase db = AppDatabase.getDatabase(getContext());
-        List<Alarme> alarmes = db.alarmeDao().getAll();
+        List<Alarme> alarmes = db.alarmeDao().getAlarmesByUsuario(CurrentUser.getInstance().getUser().getUsuarioId());
         return alarmes;
     }
 

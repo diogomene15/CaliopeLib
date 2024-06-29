@@ -18,6 +18,7 @@ import java.util.List;
 
 import br.ufms.progmobile.caliopelib.R;
 import br.ufms.progmobile.caliopelib.entities.Livro;
+import br.ufms.progmobile.caliopelib.useCases.CurrentUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +35,7 @@ public class LivrosFragment extends Fragment {
 
     private List<Livro> getAllLivros(){
         AppDatabase db = AppDatabase.getDatabase(getContext());
-        List<Livro> livros = db.livroDao().getAll();
+        List<Livro> livros = db.livroDao().getLivrosByUsuario(CurrentUser.getInstance().getUser().getUsuarioId());
         return livros;
     }
     public static LivrosFragment newInstance(String param1, String param2) {
